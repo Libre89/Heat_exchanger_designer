@@ -18,17 +18,22 @@ The principle of this exchanger is shown below.
 # Exchanger Production
 
 Step 1.
+
 ![step1](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/8d8658d5-e481-4d4d-ac74-ffd73a5ed6db)
 
 Step 2.
+
 ![step2](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/f0605fe9-2fa3-4e53-804b-8c381e02ec32)
 
 Step 3.
+
 ![step4](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/3de6ba9e-e5a2-4a42-978a-dfc2e2302684)
 
 Step 4.
+
 ![step5](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/0e74b4b0-6c84-47b9-a448-5a3b390e4748)
 
 Final product.
+
 ![Final](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/a3da154a-4ffe-4ee8-9185-c67a026cbf96)
 
