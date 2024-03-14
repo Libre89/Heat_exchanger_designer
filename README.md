@@ -24,7 +24,7 @@ Step 2.
 ![step2](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/f0605fe9-2fa3-4e53-804b-8c381e02ec32)
 
 Step 3.
-![image](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/ea435539-1630-4d63-b763-a414107e2d3f)
+![step3](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/d2a07f8e-f4f3-4dae-85c2-cf7df1797f6e)
 
 Step 4.
 ![step4](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/3de6ba9e-e5a2-4a42-978a-dfc2e2302684)
