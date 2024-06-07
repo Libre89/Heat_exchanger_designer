@@ -1,5 +1,5 @@
 from datetime import datetime
-from PIL import Image #pip install Pillow
+from PIL import Image 
 import customtkinter
 import os
 import re
@@ -27,29 +27,9 @@ class HeApp(customtkinter.CTk):
         widthCol2 = 345
         widthCol3 = 370
         widthCol4 = 800
-        self.letscontinue = True
-        
-        # ARGUMENTS #ÚPRAVA
-        self.entry_1p_arg = None
-        self.entry_2p_arg = None
-        self.entry_3p_arg = None
-        self.entry_4p_arg = None
-        self.entry_5p_arg = None
-        self.entry_6p_arg = None
-        self.entry_7p_arg = None
-        self.entry_numAngle_arg = None
-        self.entry_numFibers_arg = None
-        self.entry_rottationC_arg = None
-        self.entry_rottationA_arg = None
-        self.entry_speedF_arg = None
-        self.entry_speedE_arg = None
-        self.entry_speedS_arg = None
-        self.entry_correction_arg = None
-        
-        self.Z1_val = None
-        self.Y1_val = None
-        
-        # CALCULATE VALUE  #ÚPRAVA
+
+            
+        # VARIABLE  #ÚPRAVA
         self.Z1_val = None
         self.Y1_val = None
        
@@ -106,6 +86,8 @@ class HeApp(customtkinter.CTk):
         self.numRun = None
         self.moveOneAngle =None
         self.sumRotation = None
+        self.letscontinue = True
+
 
                 
         # COLUMN 1
@@ -170,7 +152,6 @@ class HeApp(customtkinter.CTk):
 
         # Column 2 (SETTING)
         # column 2 (label and entry)
-
         labels_and_entries2 = [
             ("F [mm/s]:", "entry_speedF"),
             ("E [mm/s]:", "entry_speedE"),
@@ -241,13 +222,13 @@ class HeApp(customtkinter.CTk):
         self.tabview3 = customtkinter.CTkTabview(self, width=widthCol4, corner_radius=cornRad, fg_color="#fff")
         self.tabview3.grid(row=0, column=3, padx=padXFrame, pady=padYFrame, sticky="nsew")
         self.tabview3.add("Generate Images")
-        # self.tabview3.add("XXX")
+        # self.tabview3.add("")
                       
         # Column 4 (img insert)
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
         self.guideImg = customtkinter.CTkImage(Image.open(os.path.join(image_path, "Image1.png")), size=(630, 343))
         self.guideImg_label = customtkinter.CTkLabel(self.tabview3.tab("Generate Images"), image=self.guideImg, text="")        
-        self.guideImg_label.pack() #why pack? → pack automaticaly in the middle
+        self.guideImg_label.pack()
 
         self.guideImg2 = customtkinter.CTkImage(Image.open(os.path.join(image_path, "Image2.png")), size=(630, 262))
         self.guideImg2_label = customtkinter.CTkLabel(self.tabview3.tab("Generate Images"), image=self.guideImg2, text="")
@@ -256,11 +237,10 @@ class HeApp(customtkinter.CTk):
     def change_appearance_mode_event(self, new_appearance_mode: str): 
         customtkinter.set_appearance_mode(new_appearance_mode)
     
-    # CONTROLUJ
     def check_value(self):
         self.letscontinue = True 
         for one_value in self.all_value_to_control:
-            if re.match("^\d+(\.\d+)?$", one_value.get()) is None:
+            if re.match("^\d+(\.\d+)?$", one_value.get()) is None: 
                 one_value.delete(0, "end")
                 one_value.configure(border_color="#ff8402", placeholder_text="Invalid input",
                                     placeholder_text_color="#ff8402")
@@ -269,84 +249,81 @@ class HeApp(customtkinter.CTk):
                 one_value.configure(border_color="#8d9399")
                 
     def get_entered_values(self):
-        self.entry_1p_arg = int(self.entry_1p.get())
-        self.entry_2p_arg = int(self.entry_2p.get())
-        self.entry_3p_arg = int(self.entry_3p.get())
-        self.entry_4p_arg = int(self.entry_4p.get())
-        self.entry_5p_arg = int(self.entry_5p.get())
-        self.entry_6p_arg = int(self.entry_6p.get())
-        self.entry_7p_arg = int(self.entry_7p.get())
-        self.entry_numAngle_arg = int(self.entry_numAngle.get())
-        self.entry_numFibers_arg = int(self.entry_numFibers.get())
-        self.entry_rottationC_arg = int(self.entry_rottationC.get())
-        self.entry_rottationA_arg = int(self.entry_rottationA.get())
-        self.entry_speedF_arg = int(self.entry_speedF.get()) # 30
-        self.entry_speedE_arg = int(self.entry_speedE.get()) # 15
-        # self.entry_speedS_arg = int(self.entry_speedS.get()) # 5 rychlos pouze v tom koncovem bode TOHLE BUDEME MUSET ODSTRANIT!!!
-        self.entry_correction_arg = int(self.entry_correction.get())
+
+        entries = [
+            "entry_1p", "entry_2p", "entry_3p", "entry_4p", "entry_5p", 
+            "entry_6p", "entry_7p", "entry_numAngle", "entry_numFibers", 
+            "entry_rottationC", "entry_rottationA", "entry_speedF", 
+            "entry_speedE", "entry_correction"
+        ]
+
+        for entry in entries:
+            value = int(getattr(self, entry).get())
+            setattr(self, entry, value)
+
         
     def formattingValue(self, valueOld):
         valueNew = str("{:.2f}".format(valueOld)).replace(".",",")
         return valueNew
 
     def calculateValues(self):
-        self.Z1_val = self.formattingValue(self.entry_1p_arg)
-        self.Y1_val = self.formattingValue(self.entry_4p_arg/2+self.entry_7p_arg)
+        self.Z1_val = self.formattingValue(self.entry_1p)
+        self.Y1_val = self.formattingValue(self.entry_4p/2+self.entry_7p)
         
-        self.F2_val = self.formattingValue(self.entry_speedF_arg+10)
-        self.Z2_val = self.formattingValue(self.entry_1p_arg+self.entry_2p_arg*0.1)
+        self.F2_val = self.formattingValue(self.entry_speedF+10)
+        self.Z2_val = self.formattingValue(self.entry_1p+self.entry_2p*0.1)
         
-        self.F3_val = self.formattingValue(self.entry_speedF_arg)
-        self.Z3_val = self.formattingValue(self.entry_1p_arg+self.entry_2p_arg)
+        self.F3_val = self.formattingValue(self.entry_speedF)
+        self.Z3_val = self.formattingValue(self.entry_1p+self.entry_2p)
         self.S3_val = self.formattingValue(self.entry_speedS_arg)
-        self.C3_val = self.formattingValue(self.entry_rottationA_arg)
-        self.A3_val = self.formattingValue(self.entry_rottationA_arg+self.sumRotation)
+        self.C3_val = self.formattingValue(self.entry_rottationA)
+        self.A3_val = self.formattingValue(self.entry_rottationA+self.sumRotation)
         
-        self.F4_val = self.formattingValue(self.entry_speedF_arg-15)
-        self.Z4_val = self.formattingValue((self.entry_1p_arg+self.entry_2p_arg)+(self.entry_1p_arg-self.entry_5p_arg))
+        self.F4_val = self.formattingValue(self.entry_speedF-15)
+        self.Z4_val = self.formattingValue((self.entry_1p+self.entry_2p)+(self.entry_1p-self.entry_5p))
         
-        self.E5_val = self.formattingValue(self.entry_speedE_arg)
-        self.Y5_val = self.formattingValue(self.entry_3p_arg/2+self.entry_6p_arg)
+        self.E5_val = self.formattingValue(self.entry_speedE)
+        self.Y5_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
         
         self.S6_val = self.formattingValue(self.entry_speedS_arg)
-        self.C6_val = self.formattingValue(self.entry_rottationC_arg+self.moveOneAngle)
-        self.A6_val = self.formattingValue(self.sumRotation+self.entry_rottationC_arg+self.entry_rottationA_arg+self.moveOneAngle)
+        self.C6_val = self.formattingValue(self.entry_rottationC+self.moveOneAngle)
+        self.A6_val = self.formattingValue(self.sumRotation+self.entry_rottationC+self.entry_rottationA+self.moveOneAngle)
         
-        self.E7_val = self.formattingValue(self.entry_speedE_arg+5)
-        self.Y7_val = self.formattingValue(self.entry_3p_arg/2+self.entry_6p_arg)
+        self.E7_val = self.formattingValue(self.entry_speedE+5)
+        self.Y7_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
         
-        self.F8_val = self.formattingValue(self.entry_speedF_arg-10)
-        self.Z8_val = self.formattingValue(self.entry_1p_arg+self.entry_2p_arg)
+        self.F8_val = self.formattingValue(self.entry_speedF-10)
+        self.Z8_val = self.formattingValue(self.entry_1p+self.entry_2p)
         
-        self.F9_val = self.formattingValue(self.entry_speedF_arg+10)
-        self.Z9_val = self.formattingValue(self.entry_1p_arg+self.entry_2p_arg*0.9)
+        self.F9_val = self.formattingValue(self.entry_speedF+10)
+        self.Z9_val = self.formattingValue(self.entry_1p+self.entry_2p*0.9)
     
-        self.F10_val = self.formattingValue(self.entry_speedF_arg)
-        self.Z10_val = self.formattingValue(self.entry_1p_arg)
+        self.F10_val = self.formattingValue(self.entry_speedF)
+        self.Z10_val = self.formattingValue(self.entry_1p)
         self.S10_val = self.formattingValue(self.entry_speedS_arg)
-        self.C10_val = self.formattingValue(self.entry_rottationA_arg)
-        self.A10_val = self.formattingValue(self.sumRotation+self.entry_rottationC_arg+2*self.entry_rottationA_arg+self.moveOneAngle)
+        self.C10_val = self.formattingValue(self.entry_rottationA)
+        self.A10_val = self.formattingValue(self.sumRotation+self.entry_rottationC+2*self.entry_rottationA+self.moveOneAngle)
         
-        self.F11_val = self.formattingValue(self.entry_speedF_arg-15)
-        self.Z11_val = self.formattingValue(self.entry_1p_arg-self.entry_5p_arg)
+        self.F11_val = self.formattingValue(self.entry_speedF-15)
+        self.Z11_val = self.formattingValue(self.entry_1p-self.entry_5p)
         
-        self.E12_val = self.formattingValue(self.entry_speedE_arg)
-        self.Y12_val = self.formattingValue(self.entry_3p_arg/2+self.entry_6p_arg)
+        self.E12_val = self.formattingValue(self.entry_speedE)
+        self.Y12_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
         
         self.S13_val = self.formattingValue(self.entry_speedS_arg)
-        self.C13_val = self.formattingValue(self.entry_rottationC_arg)
-        self.A13_val = self.formattingValue(self.sumRotation+2*self.entry_rottationC_arg+2*self.entry_rottationA_arg+self.moveOneAngle)
+        self.C13_val = self.formattingValue(self.entry_rottationC)
+        self.A13_val = self.formattingValue(self.sumRotation+2*self.entry_rottationC+2*self.entry_rottationA+self.moveOneAngle)
         
-        self.E14_val = self.formattingValue(self.entry_speedE_arg+5)
-        self.Y14_val = self.formattingValue(self.entry_3p_arg/2+self.entry_6p_arg)
+        self.E14_val = self.formattingValue(self.entry_speedE+5)
+        self.Y14_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
         
-        self.F15_val = self.formattingValue(self.entry_speedF_arg-10)
-        self.Z15_val = self.formattingValue(self.entry_1p_arg)
+        self.F15_val = self.formattingValue(self.entry_speedF-10)
+        self.Z15_val = self.formattingValue(self.entry_1p)
         
     def calculateInitals(self):
-        self.numRun = self.entry_numFibers_arg // 2 #in one run, two fiber
-        self.entry_speedS_arg = (self.entry_rottationC_arg/360)*(60/(self.entry_2p_arg*0.9/self.entry_speedF_arg))   # rychlost otáčená je počítána na základě F, nehrab do toho, REDUDANCE, 
-        self.moveOneAngle = 360/self.entry_numAngle_arg - self.entry_correction_arg # rotace v koncovém bode, je tam i korekce na rotaci
+        self.numRun = self.entry_numFibers // 2 #in one run, two fiber
+        self.entry_speedS_arg = (self.entry_rottationC/360)*(60/(self.entry_2p*0.9/self.entry_speedF))   # s directly depend on f
+        self.moveOneAngle = 360/self.entry_numAngle - self.entry_correction 
         self.sumRotation = 0
 
     
@@ -383,15 +360,14 @@ class HeApp(customtkinter.CTk):
                 file.writelines(["M601 [MARK THE MANDREL REFERFENCE ANGLE]\n\n"])
     
                 
-                # !! tady si skončil
                 for actualNumRun in range(0, self.numRun):  
                     self.calculateValues()  
                                 
-                    if actualNumRun % self.entry_numAngle_arg == 0:
-                        self.entry_5p_arg -= self.entry_correction_arg         
+                    if actualNumRun % self.entry_numAngle == 0:
+                        self.entry_5p -= self.entry_correction       
                                    
                     if actualNumRun == round(self.numRun*0.8):
-                        self.entry_7p_arg += 10 # na konci procesu tam vytovříme protor aby nedošlo ke kolizi
+                        self.entry_7p += 10 # at the end of the process, we'll put a protor in there to prevent a collision
                         
                     file.writelines(["[---]\n"])
                     
@@ -429,4 +405,3 @@ class HeApp(customtkinter.CTk):
 if __name__ == "__main__":
     app = HeApp()
     app.mainloop()
-
