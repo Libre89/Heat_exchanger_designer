@@ -27,7 +27,7 @@ class HeApp(customtkinter.CTk):
         widthCol2 = 345
         widthCol3 = 370
         widthCol4 = 800
-        letscontinue = True
+        self.letscontinue = True
         
         # ARGUMENTS #ÚPRAVA
         self.entry_1p_arg = None
@@ -152,7 +152,7 @@ class HeApp(customtkinter.CTk):
         ]
 
         for i, (label_text, entry_name) in enumerate(labels_and_entries):
-            label = customtkinter.CTkLabel(self.tabview.tab("Generate"), font=customtkinter.CTkFont(family="Futura"), text=label_text)
+            label = customtkinter.CTkLabel(self.tabview.tab("Generate"), width = 120 , anchor= "w" ,font=customtkinter.CTkFont(family="Futura"), text=label_text)
             label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
             entry = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
             entry.grid(row=i, column=1, padx=10, pady=5)
@@ -161,8 +161,6 @@ class HeApp(customtkinter.CTk):
             setattr(self, entry_name, entry)
 
 
-
-               
         # Culumn 2 (resizable place)
         self.tabview.tab("Generate").grid_rowconfigure(11, weight=1)   
         
@@ -172,36 +170,37 @@ class HeApp(customtkinter.CTk):
 
         # Column 2 (SETTING)
         # column 2 (label and entry)
-        self.label_speedF = customtkinter.CTkLabel(self.tabview.tab("Setting"),font=customtkinter.CTkFont(family="Futura"), text="F [mm/s]:")
-        self.label_speedF.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-        self.entry_speedF = customtkinter.CTkEntry(self.tabview.tab("Setting"), placeholder_text="0")
-        self.entry_speedF.grid(row=0, column=1, padx=10, pady=5,) # F = 30 !!!
-        
-        self.label_speedE = customtkinter.CTkLabel(self.tabview.tab("Setting"),font=customtkinter.CTkFont(family="Futura"), text="E [mm/s]:")
-        self.label_speedE.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-        self.entry_speedE = customtkinter.CTkEntry(self.tabview.tab("Setting"), placeholder_text="0")
-        self.entry_speedE.grid(row=1, column=1, padx=10, pady=5,)       
 
+        labels_and_entries2 = [
+            ("F [mm/s]:", "entry_speedF"),
+            ("E [mm/s]:", "entry_speedE"),
+            ("correction [°]:", "entry_correction")
+        ]
+
+        for i, (label_text, entry_name) in enumerate(labels_and_entries2):
+            label = customtkinter.CTkLabel(self.tabview.tab("Setting"), width = 120, anchor= "w", font=customtkinter.CTkFont(family="Futura"), text=label_text)
+            label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
+            entry = customtkinter.CTkEntry(self.tabview.tab("Setting"), placeholder_text="0")
+            entry.grid(row=i, column=1, padx=10, pady=5) # F30
+
+            #store entries with unique names
+            setattr(self, entry_name, entry)
+
+
+        # S directly dependent on F
         #self.label_speedS = customtkinter.CTkLabel(self.tabview.tab("Setting"),font=customtkinter.CTkFont(family="Futura"), text="S [rpm]:")
         #self.label_speedS.grid(row=2, column=0, padx=10, pady=5, sticky="w")
         #self.entry_speedS = customtkinter.CTkEntry(self.tabview.tab("Setting"), placeholder_text="0")
-        #self.entry_speedS.grid(row=2, column=1, padx=10, pady=5,)
-        
-        self.label_correction = customtkinter.CTkLabel(self.tabview.tab("Setting"),font=customtkinter.CTkFont(family="Futura"), text="correction [°]:")
-        self.label_correction.grid(row=3, column=0, padx=10, pady=5, sticky="w")
-        self.entry_correction = customtkinter.CTkEntry(self.tabview.tab("Setting"), placeholder_text="0")
-        self.entry_correction.grid(row=3, column=1, padx=10, pady=5)     
-        
-
-        self.all_value_to_control = [self.entry_1p, self.entry_2p, self.entry_3p, self.entry_4p, self.entry_5p, self.entry_6p, self.entry_7p, self.entry_numAngle, self.entry_numFibers, self.entry_rottationC, self.entry_rottationA, self.entry_speedF, self.entry_speedE, self.entry_correction]        
+        #self.entry_speedS.grid(row=2, column=1, padx=10, pady=5,)    
 
         # Column 2 (resizable place)
-        self.tabview.tab("Setting").grid_rowconfigure(4, weight=1)              
+        self.tabview.tab("Setting").grid_rowconfigure(3, weight=1)              
 
         # Column 2 (generate button)
         self.generatr_button2 = customtkinter.CTkButton(master=self.tabview.tab("Setting"), text="Generate", border_width=2, border_color="#36719f", command=self.generate_code)
-        self.generatr_button2.grid(row=5, columnspan=2, ipady=2, ipadx=2)        
-        
+        self.generatr_button2.grid(row=4, columnspan=2, ipady=2, ipadx=2)      
+
+        self.all_value_to_control = [self.entry_1p, self.entry_2p, self.entry_3p, self.entry_4p, self.entry_5p, self.entry_6p, self.entry_7p, self.entry_numAngle, self.entry_numFibers, self.entry_rottationC, self.entry_rottationA, self.entry_speedF, self.entry_speedE, self.entry_correction]    
   
         # COLUMN 3
         # create tabview
@@ -211,7 +210,7 @@ class HeApp(customtkinter.CTk):
         self.tabview2.add("Setting Guide") 
                       
         # Guide generate textbox
-        self.label_generate_guide = customtkinter.CTkTextbox(self.tabview2.tab("Generate Guide"), font=("Arial", 12), width=widthCol3, height=400, corner_radius=cornRad)
+        self.label_generate_guide = customtkinter.CTkTextbox(self.tabview2.tab("Generate Guide"), font=("Arial", 12), width=widthCol3, height=360, corner_radius=cornRad)
         self.label_generate_guide.grid(row=0, column=0, sticky="nsew")
         self.label_generate_guide.insert("0.0", "Position 1: Distance of the fixture from the zero point.\n\n"
                                                 "Position 2: Distance between fixtures.\n\n"
@@ -220,7 +219,6 @@ class HeApp(customtkinter.CTk):
                                                 "Position 5: Offset from position 1.\n\n"
                                                 "Position 6: Offset from diameter position 3.\n\n"
                                                 "Position 7: Offset from diameter position 4.\n\n"
-                                                "Correction: Enter the correction value (recommended 2°).\n\n"
                                                 "Number of Angle: Enter the number of spaces in the fixture.\n\n"
                                                 "Number of Fibres: Total number of hollow fibers of the HE.\n\n"
                                                 "c: Angle of rotation of the spindle at the end point of HE.\n\n"
@@ -234,7 +232,7 @@ class HeApp(customtkinter.CTk):
                                         "\tthe direction of the Z axis \n\n"
                                         "E:\tDetermine the speed of linear motions in\n"   
                                         "\tthe direction of the Y axis \n\n"
-                                        "corr:\t Winding machine inaccuracy correction.")
+                                        "corr:\t Enter the correction value (recommended 2°).")
         self.label_setting_guide.configure(state="disabled")  #prohibition of overwriting
 
 
@@ -259,13 +257,13 @@ class HeApp(customtkinter.CTk):
         customtkinter.set_appearance_mode(new_appearance_mode)
     
     def check_value(self):
-        letscontinue = True 
+        self.letscontinue = True 
         for one_value in self.all_value_to_control:
             if re.match("^\d+(\.\d+)?$", one_value.get()) is None:
                 one_value.delete(0, "end")
                 one_value.configure(border_color="#ff8402", placeholder_text="Invalid input",
                                     placeholder_text_color="#ff8402")
-                letscontinue = False
+                self.letscontinue = False
             else:
                 one_value.configure(border_color="#8d9399")
                 
@@ -357,7 +355,7 @@ class HeApp(customtkinter.CTk):
         self.calculateInitals()
         self.calculateValues()
         
-        if letscontinue:
+        if self.letscontinue:
             with customtkinter.filedialog.asksaveasfile(mode='w', defaultextension=".txt") as file:  #select place to save
                 file.writelines("[G-CODE GENERATED BY PYTHON on {}]\n".format(datetime.now().strftime("%Y-%m-%d%I:%M:%S %p")))
                 file.writelines("[FilePath = {}]\n".format(os.path.dirname(os.path.realpath(__file__))))
