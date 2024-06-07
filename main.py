@@ -232,7 +232,7 @@ class HeApp(customtkinter.CTk):
                                         "\tthe direction of the Z axis \n\n"
                                         "E:\tDetermine the speed of linear motions in\n"   
                                         "\tthe direction of the Y axis \n\n"
-                                        "corr:\t Enter the correction value (recommended 2°).")
+                                        "corr:\t Enter the correction value (recommended 2°).\n\n")
         self.label_setting_guide.configure(state="disabled")  #prohibition of overwriting
 
 
@@ -256,6 +256,7 @@ class HeApp(customtkinter.CTk):
     def change_appearance_mode_event(self, new_appearance_mode: str): 
         customtkinter.set_appearance_mode(new_appearance_mode)
     
+    # CONTROLUJ
     def check_value(self):
         self.letscontinue = True 
         for one_value in self.all_value_to_control:
