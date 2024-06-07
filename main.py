@@ -137,60 +137,31 @@ class HeApp(customtkinter.CTk):
                 
         # Column 2 (GENERATE)
         # column 2 (label and entry)      
-        self.label_1p = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="position 1 [mm]:")
-        self.label_1p.grid(row=0, column=0, padx=10, pady=5, sticky="w")
-        self.entry_1p = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_1p.grid(row=0, column=1, padx=10, pady=5)
+        labels_and_entries = [
+            ("position 1 [mm]:", "entry_1p"),
+            ("position 2 [mm]:", "entry_2p"),
+            ("position 3 [mm]:", "entry_3p"),
+            ("position 4 [mm]:", "entry_4p"),
+            ("position 5 [mm]:", "entry_5p"),
+            ("position 6 [mm]:", "entry_6p"),
+            ("position 7 [mm]:", "entry_7p"),
+            ("number of angles [-]:", "entry_numAngle"),
+            ("number of fibres [-]:", "entry_numFibers"),
+            ("c [°]:", "entry_rottationC"),
+            ("a [°]:", "entry_rottationA")
+        ]
 
-        self.label_2p = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="position 2 [mm]:")
-        self.label_2p.grid(row=1, column=0, padx=10, pady=5, sticky="w")
-        self.entry_2p = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_2p.grid(row=1, column=1, padx=10, pady=5)
+        for i, (label_text, entry_name) in enumerate(labels_and_entries):
+            label = customtkinter.CTkLabel(self.tabview.tab("Generate"), font=customtkinter.CTkFont(family="Futura"), text=label_text)
+            label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
+            entry = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
+            entry.grid(row=i, column=1, padx=10, pady=5)
 
-        self.label_3p = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="position 3 [mm]:")
-        self.label_3p.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-        self.entry_3p = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_3p.grid(row=2, column=1, padx=10, pady=5)
+            #store entries with unique names
+            setattr(self, entry_name, entry)
 
-        self.label_4p = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="position 4 [mm]:")
-        self.label_4p.grid(row=3, column=0, padx=10, pady=5, sticky="w")
-        self.entry_4p = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_4p.grid(row=3, column=1, padx=10, pady=5)
 
-        self.label_5p = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="position 5 [mm]:")
-        self.label_5p.grid(row=4, column=0, padx=10, pady=5, sticky="w")
-        self.entry_5p = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_5p.grid(row=4, column=1, padx=10, pady=5)
 
-        self.label_6p = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="position 6 [mm]:")
-        self.label_6p.grid(row=5, column=0, padx=10, pady=5, sticky="w")
-        self.entry_6p = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_6p.grid(row=5, column=1, padx=10, pady=5)
-
-        self.label_7p = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="position 7 [mm]:")
-        self.label_7p.grid(row=6, column=0, padx=10, pady=5, sticky="w")
-        self.entry_7p = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_7p.grid(row=6, column=1, padx=10, pady=5)
-
-        self.label_numAngle = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="number of angles [-]:")
-        self.label_numAngle.grid(row=7, column=0, padx=10, pady=5, sticky="w")
-        self.entry_numAngle = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_numAngle.grid(row=7, column=1, padx=10, pady=5)
-
-        self.label_numFibers = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="number of fibres [-]:")
-        self.label_numFibers.grid(row=8, column=0, padx=10, pady=5, sticky="w")
-        self.entry_numFibers = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_numFibers.grid(row=8, column=1, padx=10, pady=5)      
-        
-        self.label_rottationC = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="c [°]:")
-        self.label_rottationC.grid(row=9, column=0, padx=10, pady=5, sticky="w")
-        self.entry_rottationC = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_rottationC.grid(row=9, column=1, padx=10, pady=5) 
-
-        self.label_rottationA = customtkinter.CTkLabel(self.tabview.tab("Generate"),font=customtkinter.CTkFont(family="Futura"), text="a [°]:")
-        self.label_rottationA.grid(row=10, column=0, padx=10, pady=5, sticky="w")
-        self.entry_rottationA = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-        self.entry_rottationA.grid(row=10, column=1, padx=10, pady=5) 
                
         # Culumn 2 (resizable place)
         self.tabview.tab("Generate").grid_rowconfigure(11, weight=1)   
