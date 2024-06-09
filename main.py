@@ -249,7 +249,7 @@ class HeApp(customtkinter.CTk):
                 
             else:
                 one_value.configure(border_color="#8d9399")
-                
+
     def get_entered_values(self):
 
         entries = [
@@ -259,9 +259,20 @@ class HeApp(customtkinter.CTk):
             "entry_speedE", "entry_correction"
         ]
 
-        for entry in entries:
-            value = int(getattr(self, entry).get())
-            setattr(self, entry, value)
+        entry_value = [
+            "entry_1p_val", "entry_2p_val", "entry_3p_val", "entry_4p_val", "entry_5p_val", 
+            "entry_6p_val", "entry_7p_val", "entry_numAngle_val", "entry_numFibers_val", 
+            "entry_rottationC_val", "entry_rottationA_val", "entry_speedF_val", 
+            "entry_speedE_val", "entry_correction_val"
+        ]
+
+        for i in range(len(entries)):
+            value = int(getattr(self, entries[i]).get())
+            setattr(self, entry_value[i], value)
+
+        #for entry in entries:
+        #    value = int(getattr(self, entry).get())
+        #    setattr(self, entry_value, value)
 
         
     def formattingValue(self, valueOld):
@@ -269,69 +280,69 @@ class HeApp(customtkinter.CTk):
         return valueNew
 
     def calculateValues(self):
-        self.Z1_val = self.formattingValue(self.entry_1p)
-        self.Y1_val = self.formattingValue(self.entry_4p/2+self.entry_7p)
+        self.Z1_val = self.formattingValue(self.entry_1p_val)
+        self.Y1_val = self.formattingValue(self.entry_4p_val/2+self.entry_7p_val)
         
-        self.F2_val = self.formattingValue(self.entry_speedF+10)
-        self.Z2_val = self.formattingValue(self.entry_1p+self.entry_2p*0.1)
+        self.F2_val = self.formattingValue(self.entry_speedF_val+10)
+        self.Z2_val = self.formattingValue(self.entry_1p_val+self.entry_2p_val*0.1)
         
-        self.F3_val = self.formattingValue(self.entry_speedF)
-        self.Z3_val = self.formattingValue(self.entry_1p+self.entry_2p)
+        self.F3_val = self.formattingValue(self.entry_speedF_val)
+        self.Z3_val = self.formattingValue(self.entry_1p_val+self.entry_2p_val)
         self.S3_val = self.formattingValue(self.entry_speedS_arg)
-        self.C3_val = self.formattingValue(self.entry_rottationA)
-        self.A3_val = self.formattingValue(self.entry_rottationA+self.sumRotation)
+        self.C3_val = self.formattingValue(self.entry_rottationA_val)
+        self.A3_val = self.formattingValue(self.entry_rottationA_val+self.sumRotation)
         
-        self.F4_val = self.formattingValue(self.entry_speedF-15)
-        self.Z4_val = self.formattingValue((self.entry_1p+self.entry_2p)+(self.entry_1p-self.entry_5p))
+        self.F4_val = self.formattingValue(self.entry_speedF_val-15)
+        self.Z4_val = self.formattingValue((self.entry_1p_val+self.entry_2p_val)+(self.entry_1p_val-self.entry_5p_val))
         
-        self.E5_val = self.formattingValue(self.entry_speedE)
-        self.Y5_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
+        self.E5_val = self.formattingValue(self.entry_speedE_val)
+        self.Y5_val = self.formattingValue(self.entry_3p_val/2+self.entry_6p_val)
         
         self.S6_val = self.formattingValue(self.entry_speedS_arg)
-        self.C6_val = self.formattingValue(self.entry_rottationC+self.moveOneAngle)
-        self.A6_val = self.formattingValue(self.sumRotation+self.entry_rottationC+self.entry_rottationA+self.moveOneAngle)
+        self.C6_val = self.formattingValue(self.entry_rottationC_val+self.moveOneAngle)
+        self.A6_val = self.formattingValue(self.sumRotation+self.entry_rottationC_val+self.entry_rottationA_val+self.moveOneAngle)
         
-        self.E7_val = self.formattingValue(self.entry_speedE+5)
-        self.Y7_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
+        self.E7_val = self.formattingValue(self.entry_speedE_val+5)
+        self.Y7_val = self.formattingValue(self.entry_3p_val/2+self.entry_6p_val)
         
-        self.F8_val = self.formattingValue(self.entry_speedF-10)
-        self.Z8_val = self.formattingValue(self.entry_1p+self.entry_2p)
+        self.F8_val = self.formattingValue(self.entry_speedF_val-10)
+        self.Z8_val = self.formattingValue(self.entry_1p_val+self.entry_2p_val)
         
-        self.F9_val = self.formattingValue(self.entry_speedF+10)
-        self.Z9_val = self.formattingValue(self.entry_1p+self.entry_2p*0.9)
+        self.F9_val = self.formattingValue(self.entry_speedF_val+10)
+        self.Z9_val = self.formattingValue(self.entry_1p_val+self.entry_2p_val*0.9)
     
-        self.F10_val = self.formattingValue(self.entry_speedF)
-        self.Z10_val = self.formattingValue(self.entry_1p)
+        self.F10_val = self.formattingValue(self.entry_speedF_val)
+        self.Z10_val = self.formattingValue(self.entry_1p_val)
         self.S10_val = self.formattingValue(self.entry_speedS_arg)
-        self.C10_val = self.formattingValue(self.entry_rottationA)
-        self.A10_val = self.formattingValue(self.sumRotation+self.entry_rottationC+2*self.entry_rottationA+self.moveOneAngle)
+        self.C10_val = self.formattingValue(self.entry_rottationA_val)
+        self.A10_val = self.formattingValue(self.sumRotation+self.entry_rottationC_val+2*self.entry_rottationA_val+self.moveOneAngle)
         
-        self.F11_val = self.formattingValue(self.entry_speedF-15)
-        self.Z11_val = self.formattingValue(self.entry_1p-self.entry_5p)
+        self.F11_val = self.formattingValue(self.entry_speedF_val-15)
+        self.Z11_val = self.formattingValue(self.entry_1p_val-self.entry_5p_val)
         
-        self.E12_val = self.formattingValue(self.entry_speedE)
-        self.Y12_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
+        self.E12_val = self.formattingValue(self.entry_speedE_val)
+        self.Y12_val = self.formattingValue(self.entry_3p_val/2+self.entry_6p_val)
         
         self.S13_val = self.formattingValue(self.entry_speedS_arg)
-        self.C13_val = self.formattingValue(self.entry_rottationC)
-        self.A13_val = self.formattingValue(self.sumRotation+2*self.entry_rottationC+2*self.entry_rottationA+self.moveOneAngle)
+        self.C13_val = self.formattingValue(self.entry_rottationC_val)
+        self.A13_val = self.formattingValue(self.sumRotation+2*self.entry_rottationC_val+2*self.entry_rottationA_val+self.moveOneAngle)
         
-        self.E14_val = self.formattingValue(self.entry_speedE+5)
-        self.Y14_val = self.formattingValue(self.entry_3p/2+self.entry_6p)
+        self.E14_val = self.formattingValue(self.entry_speedE_val+5)
+        self.Y14_val = self.formattingValue(self.entry_3p_val/2+self.entry_6p_val)
         
-        self.F15_val = self.formattingValue(self.entry_speedF-10)
-        self.Z15_val = self.formattingValue(self.entry_1p)
+        self.F15_val = self.formattingValue(self.entry_speedF_val-10)
+        self.Z15_val = self.formattingValue(self.entry_1p_val)
         
     def calculateInitals(self):
-        self.numRun = self.entry_numFibers // 2 #in one run, two fiber
-        self.entry_speedS_arg = (self.entry_rottationC/360)*(60/(self.entry_2p*0.9/self.entry_speedF))   # s directly depend on f
-        self.moveOneAngle = 360/self.entry_numAngle - self.entry_correction 
+        self.numRun = self.entry_numFibers_val // 2 #in one run, two fiber
+        self.entry_speedS_arg = (self.entry_rottationC_val/360)*(60/(self.entry_2p_val*0.9/self.entry_speedF_val))   # s directly depend on f
+        self.moveOneAngle = 360/self.entry_numAngle_val - self.entry_correction_val 
         self.sumRotation = 0
 
     
     def generate_code(self):
         self.check_value()
-        
+
         if self.letscontinue:
             self.get_entered_values()
             self.calculateInitals()
@@ -365,11 +376,11 @@ class HeApp(customtkinter.CTk):
                 for actualNumRun in range(0, self.numRun):  
                     self.calculateValues()  
                                 
-                    if actualNumRun % self.entry_numAngle == 0:
-                        self.entry_5p -= self.entry_correction       
+                    if actualNumRun % self.entry_numAngle_val == 0:
+                        self.entry_5p_val -= self.entry_correction_val       
                                    
                     if actualNumRun == round(self.numRun*0.8):
-                        self.entry_7p += 10 # at the end of the process, we'll put a protor in there to prevent a collision
+                        self.entry_7p_val += 10 # at the end of the process, we'll put a protor in there to prevent a collision
                         
                     file.writelines(["[---]\n"])
                     
