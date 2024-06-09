@@ -29,7 +29,7 @@ class HeApp(customtkinter.CTk):
         widthCol4 = 800
 
             
-        # VARIABLE  #ÚPRAVA
+        # VARIABLE
         self.Z1_val = None
         self.Y1_val = None
        
