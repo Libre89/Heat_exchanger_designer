@@ -2,6 +2,12 @@
 
 This python program is designed for the construction of polymer heat exchangers on the X-Winder device.  Based on the parameters entered by the user, the program generates a G-code which controls the X-Winder winding device and produces the heat exchanger.
 
+The figure below shows the user interface of the developed software. Several values are entered into the software based on the descriptions and images included in the software.
+
+![Uploading HeDesign_img1.png…]()
+
+
+
 # X-Winder
 
 The core of the exchanger is manufactured on an X-Winder 4X-C winding machine with four axes of motion. The winder is originally controlled by the X-Winder Desinger software supplied with the winder. However, the winder was not designed for the production of heat exchangers and therefore the use of the software for the purpose of heat exchanger production is very difficult.
