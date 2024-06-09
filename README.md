@@ -1,11 +1,10 @@
-# About Heat Exchanger Designer
+![HeDesign_img1](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/ecfcc8e2-92bc-4b8e-a41e-738da90c9223)# About Heat Exchanger Designer
 
 This python program is designed for the construction of polymer heat exchangers on the X-Winder device.  Based on the parameters entered by the user, the program generates a G-code which controls the X-Winder winding device and produces the heat exchanger.
 
 The figure below shows the user interface of the developed software. Several values are entered into the software based on the descriptions and images included in the software.
 
-![Uploading HeDesign_img1.png…]()
-
+![image](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/a8c8d5d3-cf04-453f-bdb8-25b772153cf0)
 
 
 # X-Winder
