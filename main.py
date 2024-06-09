@@ -240,7 +240,7 @@ class HeApp(customtkinter.CTk):
     def check_value(self):
         self.letscontinue = True 
         for one_value in self.all_value_to_control:
-            if re.match("^\d+(\.\d+)?$", one_value.get()) is None: #UPRAV
+            if re.match(r"^\d+(\.\d+)?$", one_value.get()) is None: #UPRAV
                 one_value.delete(0, "end")
                 one_value.configure(border_color="#ff8402", placeholder_text="Invalid input",
                                     placeholder_text_color="#ff8402")
