@@ -34,7 +34,7 @@ Heat exchangers constructed from polymer hollow fibers create the potential for 
 The principle of this exchanger is shown below.
 ![Polymer Heat exchanger](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/8886a7e8-cc99-48fb-abfb-57ff1e84691a)
 
-# Exchanger Production
+# Heat Exchanger Production
 
 Step 1.
 
