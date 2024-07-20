@@ -158,29 +158,17 @@ class HeApp(customtkinter.CTk):
             ("correction [°]:", "entry_correction")
         ]
 
-        for i, (label_text, entry_name) in enumerate(labels_and_entries2):
-            label = customtkinter.CTkLabel(self.tabview.tab("Setting"), width = 120, anchor= "w", font=customtkinter.CTkFont(family="Futura"), text=label_text)
-            label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
-            entry = customtkinter.CTkEntry(self.tabview.tab("Setting"), placeholder_text="0")
-            entry.grid(row=i, column=1, padx=10, pady=5) # F30
-
-            #store entries with unique names
-            setattr(self, entry_name, entry)
-
-
-        # S directly dependent on F
-        #self.label_speedS = customtkinter.CTkLabel(self.tabview.tab("Setting"),font=customtkinter.CTkFont(family="Futura"), text="S [rpm]:")
-        #self.label_speedS.grid(row=2, column=0, padx=10, pady=5, sticky="w")
-        #self.entry_speedS = customtkinter.CTkEntry(self.tabview.tab("Setting"), placeholder_text="0")
-        #self.entry_speedS.grid(row=2, column=1, padx=10, pady=5,)    
+        self.create_labels_and_entries(self.tabview.tab("Setting"), labels_and_entries2)
 
         # Column 2 (resizable place)
         self.tabview.tab("Setting").grid_rowconfigure(3, weight=1)              
 
+        ###
         # Column 2 (generate button)
         self.generatr_button2 = customtkinter.CTkButton(master=self.tabview.tab("Setting"), text="Generate", border_width=2, border_color="#36719f", command=self.generate_code)
         self.generatr_button2.grid(row=4, columnspan=2, ipady=2, ipadx=2)      
 
+        # Set value to control
         self.all_value_to_control = [self.entry_1p, self.entry_2p, self.entry_3p, self.entry_4p, self.entry_5p, self.entry_6p, self.entry_7p, self.entry_numAngle, self.entry_numFibers, self.entry_rottationC, self.entry_rottationA, self.entry_speedF, self.entry_speedE, self.entry_correction]    
   
         # COLUMN 3
