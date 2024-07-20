@@ -18,7 +18,6 @@ class HeApp(customtkinter.CTk):
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(3, weight=1)
 
-
         # STATIC VARIABLE
         padXFrame = 10
         padYFrame = 20
@@ -28,72 +27,85 @@ class HeApp(customtkinter.CTk):
         widthCol3 = 370
         widthCol4 = 800
 
+        # INIT VARIABLES
+        self.init_variables()
             
-        # VARIABLE
+        # COLUMN 1
+        self.setup_column1(padXFrame, padYFrame, cornRad, widthCol1)
+        
+        # COLUMN 2
+        self.setup_column2(padXFrame, padYFrame, cornRad, widthCol2)
+
+        # COLUMN 3
+        self.setup_column3(padXFrame, padYFrame, cornRad, widthCol3)
+
+        # COLUMN 4
+        self.setup_column4(padXFrame, padYFrame, cornRad, widthCol4)
+
+    def init_variables(self):
+        self.entries = {}
+
         self.Z1_val = None
         self.Y1_val = None
-       
         self.F2_val = None
         self.Z2_val = None
-        
         self.F3_val = None
         self.Z3_val = None
         self.S3_val = None
         self.C3_val = None
         self.A3_val = None
-        
         self.F4_val = None
         self.Z4_val = None
-        
         self.E5_val = None
         self.Y5_val = None
-        
         self.S6_val = None
         self.C6_val = None
         self.A6_val = None
-        
         self.E7_val = None
         self.Y7_val = None
-        
         self.F8_val = None
         self.Z8_val = None
-        
         self.F9_val = None
         self.Z9_val = None
-    
         self.F10_val = None
         self.Z10_val = None
         self.S10_val = None
         self.C10_val = None
         self.A10_val = None
-        
         self.F11_val = None
         self.Z11_val = None
-        
         self.E12_val = None
         self.Y12_val = None
-        
         self.S13_val = None
         self.C13_val = None
         self.A13_val = None
-        
         self.E14_val = None
         self.Y14_val = None
-        
         self.F15_val = None
         self.Z15_val = None
-        
         self.numRun = None
-        self.moveOneAngle =None
+        self.moveOneAngle = None
         self.sumRotation = None
         self.letscontinue = True
 
+        self.entry_1p_val = None
+        self.entry_2p_val = None
+        self.entry_3p_val = None
+        self.entry_4p_val = None
+        self.entry_5p_val = None
+        self.entry_6p_val = None
+        self.entry_7p_val = None
+        self.entry_numAngle_val = None
+        self.entry_numFibers_val = None
+        self.entry_rottationC_val = None
+        self.entry_rottationA_val = None
 
-                
-        # COLUMN 1
+
+    def setup_column1(self, padXFrame, padYFrame, cornRad, widthCol1):
+        # create tabview
         self.mainFrame = customtkinter.CTkFrame(self, width=widthCol1, corner_radius=cornRad)
         self.mainFrame.grid(row=0, column=0, padx=padXFrame, pady=padYFrame, sticky="nsew")
-        
+       
         # Column 1 (app name label)
         self.appName = customtkinter.CTkLabel(self.mainFrame, text="HeDesign", font=customtkinter.CTkFont(family="Futura", size=30, weight="bold"))
         self.appName.grid(row=0, column=0, padx=15, pady=20)
@@ -109,39 +121,29 @@ class HeApp(customtkinter.CTk):
         self.appearanceModeOptioneMenu = customtkinter.CTkOptionMenu(self.mainFrame,values=["Light", "Dark"],command=self.change_appearance_mode_event,anchor="center")
         self.appearanceModeOptioneMenu.grid(row=3, column=0, pady=(5, 20))        
    
-    
-        # COLUMN 2
+    def setup_column2(self, padXFrame, padYFrame, cornRad, widthCol2):
         # create tabview
         self.tabview = customtkinter.CTkTabview(self, width=widthCol2, corner_radius=cornRad)
         self.tabview.grid(row=0, column=1, padx=padXFrame, pady=padYFrame, sticky="nsew")
         self.tabview.add("Generate")
         self.tabview.add("Setting")
-                
-        # Column 2 (GENERATE)
+
         # column 2 (label and entry)      
         labels_and_entries = [
-            ("position 1 [mm]:", "entry_1p"),
-            ("position 2 [mm]:", "entry_2p"),
-            ("position 3 [mm]:", "entry_3p"),
-            ("position 4 [mm]:", "entry_4p"),
-            ("position 5 [mm]:", "entry_5p"),
-            ("position 6 [mm]:", "entry_6p"),
-            ("position 7 [mm]:", "entry_7p"),
-            ("number of angles [-]:", "entry_numAngle"),
-            ("number of fibres [-]:", "entry_numFibers"),
-            ("c [°]:", "entry_rottationC"),
-            ("a [°]:", "entry_rottationA")
+        ("position 1 [mm]:", "entry_1p"),
+        ("position 2 [mm]:", "entry_2p"),
+        ("position 3 [mm]:", "entry_3p"),
+        ("position 4 [mm]:", "entry_4p"),
+        ("position 5 [mm]:", "entry_5p"),
+        ("position 6 [mm]:", "entry_6p"),
+        ("position 7 [mm]:", "entry_7p"),
+        ("number of angles [-]:", "entry_numAngle"),
+        ("number of fibres [-]:", "entry_numFibers"),
+        ("c [°]:", "entry_rottationC"),
+        ("a [°]:", "entry_rottationA")
         ]
 
-        for i, (label_text, entry_name) in enumerate(labels_and_entries):
-            label = customtkinter.CTkLabel(self.tabview.tab("Generate"), width = 120 , anchor= "w" ,font=customtkinter.CTkFont(family="Futura"), text=label_text)
-            label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
-            entry = customtkinter.CTkEntry(self.tabview.tab("Generate"), placeholder_text="0")
-            entry.grid(row=i, column=1, padx=10, pady=5)
-
-            #store entries with unique names
-            setattr(self, entry_name, entry)
-
+        self.create_labels_and_entries(self.tabview.tab("Generate"), labels_and_entries)
 
         # Culumn 2 (resizable place)
         self.tabview.tab("Generate").grid_rowconfigure(11, weight=1)   
@@ -158,27 +160,23 @@ class HeApp(customtkinter.CTk):
             ("correction [°]:", "entry_correction")
         ]
 
-        self.create_labels_and_entries(self.tabview.tab("Setting"), labels_and_entries2)
+        self.create_labels_and_entries(self.tabview.tab("Setting"), labels_and_entries2) 
 
         # Column 2 (resizable place)
         self.tabview.tab("Setting").grid_rowconfigure(3, weight=1)              
 
-        ###
         # Column 2 (generate button)
         self.generatr_button2 = customtkinter.CTkButton(master=self.tabview.tab("Setting"), text="Generate", border_width=2, border_color="#36719f", command=self.generate_code)
         self.generatr_button2.grid(row=4, columnspan=2, ipady=2, ipadx=2)      
 
-        # Set value to control
-        self.all_value_to_control = [self.entry_1p, self.entry_2p, self.entry_3p, self.entry_4p, self.entry_5p, self.entry_6p, self.entry_7p, self.entry_numAngle, self.entry_numFibers, self.entry_rottationC, self.entry_rottationA, self.entry_speedF, self.entry_speedE, self.entry_correction]    
-  
-        # COLUMN 3
+    def setup_column3(self, padXFrame, padYFrame, cornRad, widthCol3):
         # create tabview
         self.tabview2 = customtkinter.CTkTabview(self,  width=widthCol3, corner_radius=cornRad)
         self.tabview2.grid(row=0, column=2, padx=padXFrame, pady=padYFrame, sticky="nsew")
         self.tabview2.add("Generate Guide")
         self.tabview2.add("Setting Guide") 
                       
-        # Guide generate textbox
+        # Guide GENERATE textbox
         self.label_generate_guide = customtkinter.CTkTextbox(self.tabview2.tab("Generate Guide"), font=("Arial", 12), width=widthCol3, height=360, corner_radius=cornRad)
         self.label_generate_guide.grid(row=0, column=0, sticky="nsew")
         self.label_generate_guide.insert("0.0", "Position 1: Distance of the fixture from the zero point.\n\n"
@@ -194,7 +192,7 @@ class HeApp(customtkinter.CTk):
                                                 "a: Angle of rotation of the spindle during winding of HE.")
         self.label_generate_guide.configure(state="disabled")  
         
-        # Guide setting textbox
+        # Guide SETTING textbox
         self.label_setting_guide = customtkinter.CTkTextbox(self.tabview2.tab("Setting Guide"), font=("Arial", 12), width=widthCol3, height=170, corner_radius=cornRad)
         self.label_setting_guide.grid(row=0, column=0, sticky="nsew")
         self.label_setting_guide.insert("0.0", "F:\tDetermine the speed of linear motions in\n" 
@@ -204,13 +202,11 @@ class HeApp(customtkinter.CTk):
                                         "corr:\t Enter the correction value (recommended 2°).\n\n")
         self.label_setting_guide.configure(state="disabled")  #prohibition of overwriting
 
-
-        # COLUMN 4
+    def setup_column4(self, padXFrame, padYFrame, cornRad, widthCol4):
         # create tabview
         self.tabview3 = customtkinter.CTkTabview(self, width=widthCol4, corner_radius=cornRad, fg_color="#fff")
         self.tabview3.grid(row=0, column=3, padx=padXFrame, pady=padYFrame, sticky="nsew")
         self.tabview3.add("Generate Images")
-        # self.tabview3.add("")
                       
         # Column 4 (img insert)
         image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "img")
@@ -221,48 +217,45 @@ class HeApp(customtkinter.CTk):
         self.guideImg2 = customtkinter.CTkImage(Image.open(os.path.join(image_path, "Image2.png")), size=(630, 262))
         self.guideImg2_label = customtkinter.CTkLabel(self.tabview3.tab("Generate Images"), image=self.guideImg2, text="")
         self.guideImg2_label.pack()
+
+    def create_labels_and_entries(self, tab, labels_and_entries):
+        '''
+        Create labels with entry.\n
+        Keyword arguments:\n
+        tab -> root, tkinter.Frame or CTkFrame\n 
+        labels_and_entries -> tuple in format (label text,entry text)
+        '''
+        for i, (label_text, entry_name) in enumerate(labels_and_entries):
+            label = customtkinter.CTkLabel(tab, width = 120 , anchor= "w" ,font=customtkinter.CTkFont(family="Futura"), text=label_text)
+            label.grid(row=i, column=0, padx=10, pady=5, sticky="w")
+            entry = customtkinter.CTkEntry(tab, placeholder_text="0")
+            entry.grid(row=i, column=1, padx=10, pady=5)    
+
+            #store entries with unique names
+            self.entries[entry_name] = entry
         
     def change_appearance_mode_event(self, new_appearance_mode: str): 
         customtkinter.set_appearance_mode(new_appearance_mode)
     
     def check_value(self):
         self.letscontinue = True 
-        for one_value in self.all_value_to_control:
-            if re.match(r"^\d+(\.\d+)?$", one_value.get()) is None: #UPRAV
-                one_value.delete(0, "end")
-                one_value.configure(border_color="#ff8402", placeholder_text="Invalid input",
-                                    placeholder_text_color="#ff8402")
+        for entry_name, entry in self.entries.items():
+            if re.match(r"^\d+(\.\d+)?$", entry.get()) is None:
+                entry.delete(0, "end")
+                entry.configure(border_color="#ff8402", placeholder_text="Invalid input", placeholder_text_color="#ff8402")
                 self.letscontinue = False
-
-                
             else:
-                one_value.configure(border_color="#8d9399")
+                entry.configure(border_color="#8d9399")
 
     def get_entered_values(self):
+        '''
+        Get entered value and create new value\n
+        New atribut → entry_name + '_val'
+        '''
+        for entry_name, entry in self.entries.items():
+            value = int(entry.get())
+            setattr(self, entry_name + "_val", value)
 
-        entries = [
-            "entry_1p", "entry_2p", "entry_3p", "entry_4p", "entry_5p", 
-            "entry_6p", "entry_7p", "entry_numAngle", "entry_numFibers", 
-            "entry_rottationC", "entry_rottationA", "entry_speedF", 
-            "entry_speedE", "entry_correction"
-        ]
-
-        entry_value = [
-            "entry_1p_val", "entry_2p_val", "entry_3p_val", "entry_4p_val", "entry_5p_val", 
-            "entry_6p_val", "entry_7p_val", "entry_numAngle_val", "entry_numFibers_val", 
-            "entry_rottationC_val", "entry_rottationA_val", "entry_speedF_val", 
-            "entry_speedE_val", "entry_correction_val"
-        ]
-
-        for i in range(len(entries)):
-            value = int(getattr(self, entries[i]).get())
-            setattr(self, entry_value[i], value)
-
-        #for entry in entries:
-        #    value = int(getattr(self, entry).get())
-        #    setattr(self, entry_value, value)
-
-        
     def formattingValue(self, valueOld):
         valueNew = str("{:.2f}".format(valueOld)).replace(".",",")
         return valueNew
@@ -320,14 +313,13 @@ class HeApp(customtkinter.CTk):
         
         self.F15_val = self.formattingValue(self.entry_speedF_val-10)
         self.Z15_val = self.formattingValue(self.entry_1p_val)
-        
+
     def calculateInitals(self):
         self.numRun = self.entry_numFibers_val // 2 #in one run, two fiber
         self.entry_speedS_arg = (self.entry_rottationC_val/360)*(60/(self.entry_2p_val*0.9/self.entry_speedF_val))   # s directly depend on f
         self.moveOneAngle = 360/self.entry_numAngle_val - self.entry_correction_val 
         self.sumRotation = 0
 
-    
     def generate_code(self):
         self.check_value()
 
