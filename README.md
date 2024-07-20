@@ -2,15 +2,20 @@
 
 Heat Exchanger Designer is a Python program designed for the construction of polymer heat exchangers using the X-Winder device. Based on parameters entered by the user, the program generates G-code that controls the X-Winder winding device to produce the heat exchanger.
 
-The figure below shows the user interface of the developed software. Several values are entered into the software based on the descriptions and images included in the software.
+## Initial Interface
+In this state, several values need to be entered into the software based on the descriptions and images included.
 
 ![HeDesign_img1](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/243f089a-3fee-4d5c-b2f6-54037aba5d5c)
+
+## Populated Interface
 
 The next image shows the software with the values already entered by the user.
 
 ![HeDesign_img2](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/d6e913a9-88f3-465e-b08a-7e61aef633cb)
 
-The next two figures show the behavior of the firmware in case of entering an incorrect value.
+## Error Handling
+
+The next two figures show the behavior of the software in case of entering an incorrect value.
 
 ![HeDesign_img3](https://github.com/Libre89/Heat_exchanger_designer/assets/101059017/9a62bb43-7db1-4e2b-bb98-f0230edf902c)
 
